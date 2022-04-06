@@ -8,7 +8,7 @@ class DashboardController extends Controller
 {
     public function indexAction()
     {
-        if(!$this->session->has('username')){
+        if(!$this->session->has('username') && !$this->cookies->has('remember-me')){
             $this->response->redirect('../login');
           }
         $config = $this->di->get("config");
@@ -17,13 +17,6 @@ class DashboardController extends Controller
          
         $currentPage = (int) $_GET['page'];
         $this->view->users = Users::find(); 
-        // $paginator = new PaginatorModel(
-        //     [
-        //         'data'  => $users,
-        //         'limit' => 5,
-        //         'page'  => $currentPage,
-        //     ]
-        // );
-        //$page = $paginator->getPaginate();
+       
     }
 }
